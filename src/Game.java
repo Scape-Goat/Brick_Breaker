@@ -6,28 +6,28 @@ import javax.swing.WindowConstants;
 public class Game extends JFrame implements KeyListener {
 
   Board board;
+  private boolean leftPressed, rightPressed, aPressed, dPressed;
+
   public Game(){
-    //enables/disables user ability to change frame size
+
     setResizable(false);
-    //enables/disables whether the frame renders on screen
-    //*************************
+
     setVisible(true);
 
-    //*************************
-    //enables/disables whether the frame can be an active window
+
     setFocusable(true);
-    //sets the text in the title bar of the frame
+
     setTitle("Brick Breaker");
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    //creates an instance of the Board class
+
     board = new Board();
-    //adds the board panel to the frame
+
     add(board);
-    //add the KeyListener to the frame so its active
+
     addKeyListener(this);
-    //packages all components and determines best layout/size
+
     pack();
-    //centers the frame on the screen
+
     setLocationRelativeTo(null);
     //board.GameStart();
   }
@@ -44,11 +44,45 @@ public class Game extends JFrame implements KeyListener {
 
   @Override
   public void keyPressed(KeyEvent e) {
+    if(e.getKeyCode() == KeyEvent.VK_LEFT) leftPressed = true;
 
+    if(e.getKeyCode() == KeyEvent.VK_RIGHT) rightPressed = true;
+
+    if(e.getKeyCode() == KeyEvent.VK_A) aPressed = true;
+
+    if(e.getKeyCode() == KeyEvent.VK_D) dPressed = true;
+
+    if(e.getKeyCode() == KeyEvent.VK_ESCAPE)GAMESTATES.startMenu();
+
+      if(e.getKeyCode() == KeyEvent.VK_CONTROL && GAMESTATES.isMenu()) GAMESTATES.toggleGameType();
+
+    if(e.getKeyCode() == KeyEvent.VK_P && (GAMESTATES.isPlay()|| GAMESTATES.isPause())) {
+      GAMESTATES.togglePause();
+      GAMESTATES.togglePlay();
+    }
+    if(e.getKeyCode() == KeyEvent.VK_SPACE && (GAMESTATES.isMenu() || GAMESTATES.isEnd())){
+      GAMESTATES.startPlay();
+      GAMESTATES.stopMenu();
+      GAMESTATES.stopPause();
+      //board.gameRestart();
+    }
   }
 
   @Override
   public void keyReleased(KeyEvent e) {
+    if(e.getKeyCode() == KeyEvent.VK_LEFT) leftPressed = false;
+
+    if(e.getKeyCode() == KeyEvent.VK_RIGHT) rightPressed = false;
+
+    if(e.getKeyCode() == KeyEvent.VK_A) aPressed = false;
+
+    if(e.getKeyCode() == KeyEvent.VK_D) dPressed = false;
+
 
   }
+
+  public boolean isLeftPressed() {return leftPressed;}
+  public boolean isRightPressed() {return rightPressed;}
+  public boolean isaPressed() {return aPressed;}
+  public boolean isdPressed() {return dPressed;}
 }
