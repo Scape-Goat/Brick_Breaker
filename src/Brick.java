@@ -25,7 +25,7 @@ public class Brick {
   public Brick(int x, int y, int rank){
     this.x = x;
     this.y=y;
-    this.rank = rank;
+    this.rank = rank-1;
   }
 
   public void decreaseRank(){

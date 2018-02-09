@@ -9,7 +9,7 @@ public class Board extends JPanel implements ActionListener {
     Ball p1Ball, p2Ball;
     Timer timer;
    
-    int ticks = 0, timeSec=0, timeMin = 0;
+   Level level;
 
     //region Colors
   Color red = new Color(255,0,0);
@@ -34,7 +34,7 @@ public class Board extends JPanel implements ActionListener {
       p2Paddle = new Paddle(this, game);
       p1Ball = new Ball(this);
       p2Ball = new Ball(this);
-
+        level = new Level(9,this);
     timer = new Timer(1000/100, this);
     timer.start();
 
@@ -74,7 +74,8 @@ public class Board extends JPanel implements ActionListener {
               p2Ball.paint(g);
               p2Paddle.paint(g);
             }
-          printSimpleString(timeSec/60+":"+ timeSec%60+":"+ticks, getWidth(), 0, getHeight()/2, g);
+            level.paint(g);
+
 
         }
         else{
@@ -88,12 +89,6 @@ public class Board extends JPanel implements ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-      ticks+=1;
-      if(ticks!=0 && ticks%60==0){
-        timeSec+=1;
-      }
-      if(timeSec!=0 && timeSec%60==0)
-        timeMin++;
       if(GAMESTATES.isPlay()){
         p1Paddle.move();
         p1Ball.move();
