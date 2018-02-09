@@ -2,15 +2,32 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import sun.plugin2.util.ColorUtil.ColorRGB;
 
 public class Board extends JPanel implements ActionListener {
     Paddle p1Paddle, p2Paddle;
     Ball p1Ball, p2Ball;
     Timer timer;
+   
+    int ticks = 0, timeSec=0, timeMin = 0;
+
+    //region Colors
+  Color red = new Color(255,0,0);
+  Color orange = new Color(255,127,0);
+  Color yellow = new Color(255,255,0);
+  Color lime = new Color(127,255,0);
+  Color green = new Color(0,255,0);
+  Color teal = new Color(0,255,127);
+  Color cyan = new Color(0,255,255);
+  Color lightBlue = new Color(0,127,255);
+  Color blue = new Color(0,0,255);
+//endregion
+
+
 
     public Board(Game game){
       //sets the size JFrame.pack should use if its optimal
-      setPreferredSize(new Dimension(800, 600));
+      setPreferredSize(new Dimension(600, 800));
       //sets the background color of the panel
       setBackground(Color.BLACK);
       p1Paddle = new Paddle(this, game);
@@ -18,15 +35,25 @@ public class Board extends JPanel implements ActionListener {
       p1Ball = new Ball(this);
       p2Ball = new Ball(this);
 
-    timer = new Timer(1000/60, this);
+    timer = new Timer(1000/100, this);
     timer.start();
 
+
+
     }
+    public void GameStart(){
+    //initial rendering position of graphics
+    p1Ball.setPosition(getWidth()/2, getHeight()/2);
+    p1Paddle.setPosition(0,getHeight()-25);
+    p2Paddle.setPosition(0, 25);
+    //creates a timer to control rendering graphics and game updates
+
+  }
 
     public  void paintComponent(Graphics g){
         super.paintComponent(g);
-        g.setColor(Color.WHITE);
-        g.setFont(new Font(Font.SERIF, Font.BOLD, 90));
+        g.setColor(lightBlue);
+        g.setFont(new Font(Font.SERIF, Font.BOLD, 20));
         if(GAMESTATES.isMenu()){
             printSimpleString("Menu", getWidth(), 0, getHeight()/2, g);
         }
@@ -38,7 +65,17 @@ public class Board extends JPanel implements ActionListener {
             printSimpleString("Pause", getWidth(), 0, getHeight()/2, g);
         }
         else if(GAMESTATES.isPlay()){
-            printSimpleString("Play", getWidth(), 0, getHeight()/2, g);
+            //printSimpleString("Play", getWidth(), 0, getHeight()/2, g);
+          g.setColor(red);
+            p1Ball.paint(g);
+            p1Paddle.paint(g);
+            if(GAMESTATES.isMulti()) {
+              g.setColor(lime);
+              p2Ball.paint(g);
+              p2Paddle.paint(g);
+            }
+          printSimpleString(timeSec/60+":"+ timeSec%60+":"+ticks, getWidth(), 0, getHeight()/2, g);
+
         }
         else{
 
@@ -51,7 +88,13 @@ public class Board extends JPanel implements ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    if(GAMESTATES.isPlay()){
+      ticks+=1;
+      if(ticks!=0 && ticks%60==0){
+        timeSec+=1;
+      }
+      if(timeSec!=0 && timeSec%60==0)
+        timeMin++;
+      if(GAMESTATES.isPlay()){
         p1Paddle.move();
         p1Ball.move();
         if(GAMESTATES.isMulti()) {
@@ -59,7 +102,6 @@ public class Board extends JPanel implements ActionListener {
             p2Ball.move();
         }
     }
-
 
       repaint();
   }

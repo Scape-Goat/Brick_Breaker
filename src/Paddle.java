@@ -7,7 +7,6 @@ public class Paddle {
 
   Board board;
   Game game;
-  Ball p2Ball;
 
   public Paddle(Board board, Game game){
     x = 0;
@@ -15,7 +14,6 @@ public class Paddle {
 
     this.board = board;
     this.game = game;
-    this.p2Ball = p2Ball;
   }
 
   public void move(){
@@ -26,14 +24,23 @@ public class Paddle {
   }
 
   public void move2nd(){
-        if(game.isaPressed() && x > 0)
+        if(game.isLeftPressed() && x > 0)
             x -= dx;
-        else if (game.isdPressed() && x+width<board.getWidth())
+        else if (game.isRightPressed() && x+width<board.getWidth())
             x += dx;
 
   }
   public Rectangle getBounds(){
       return new Rectangle(x,y,width, HEIGHT);
+  }
+
+  public void setPosition(int x, int y){
+    this.x = x - width/2;
+    this.y = y - HEIGHT/2;
+  }
+
+  public void paint(Graphics g) {
+    g.fillRect(x,y,width,HEIGHT);
   }
 
 }

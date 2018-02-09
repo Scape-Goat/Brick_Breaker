@@ -20,7 +20,7 @@ public class Game extends JFrame implements KeyListener {
     setTitle("Brick Breaker");
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-    board = new Board();
+    board = new Board(this);
 
     add(board);
 
@@ -62,6 +62,7 @@ public class Game extends JFrame implements KeyListener {
     }
     if(e.getKeyCode() == KeyEvent.VK_SPACE && (GAMESTATES.isMenu() || GAMESTATES.isEnd())){
       GAMESTATES.startPlay();
+      board.GameStart();
       GAMESTATES.stopMenu();
       GAMESTATES.stopPause();
       //board.gameRestart();
