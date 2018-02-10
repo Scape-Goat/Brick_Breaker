@@ -3,7 +3,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 public class Brick {
-
+boolean paint = true;
 
 
   //region Colors
@@ -20,10 +20,12 @@ public class Brick {
   //endregion
 
   int x, y, rank;
-   static int width = 35;
+   static int width = 50;
    static int height = 20;
 
-  public Brick(int x, int y, int rank){
+  public Brick(int x, int y, int rank, int width, int height){
+    this.width = width;
+    this.height = height;
     this.x = x;
     this.y=y;
     this.rank = rank-1;
@@ -31,11 +33,16 @@ public class Brick {
 
   public void decreaseRank(){
     rank-=1;
+    if(rank<0)
+      paint = false;
+
   }
 
   public void paint(Graphics g){
-    g.setColor(colors[rank]);
-    g.fillRect(x, y, width, height);
+    if(paint) {
+      g.setColor(colors[rank]);
+      g.fillOval(x, y, width, height);
+    }
   }
 
   public static int getWidth() {
@@ -51,7 +58,12 @@ public class Brick {
   }
 
   public void checkCollision(Ball ball){
-    //
-  }
+      if(getBounds().intersects(ball.getBounds()))
+        decreaseRank();
+
+
+
+    }
+
 
 }

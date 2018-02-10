@@ -2,7 +2,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 public class Ball {
-    int x, y, dx=3, dy=3, diameter = 25;
+    int x, y, dx= 30, dy=30, diameter = 1;
 
     Board board;
     public Ball(Board board){
@@ -31,5 +31,13 @@ public class Ball {
     g.fillOval(x, y, diameter, diameter);
   }
   public Rectangle getBounds(){return new Rectangle(x,y,diameter,diameter);}
+
+  public void checkCollision(Level level){
+
+
+
+
+  }
+
 
 }
