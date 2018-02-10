@@ -1,4 +1,5 @@
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 public class Ball {
     int x, y, dx=3, dy=3, diameter = 25;
@@ -29,4 +30,6 @@ public class Ball {
   public void paint(Graphics g){
     g.fillOval(x, y, diameter, diameter);
   }
+  public Rectangle getBounds(){return new Rectangle(x,y,diameter,diameter);}
+
 }

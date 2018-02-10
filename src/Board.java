@@ -34,7 +34,7 @@ public class Board extends JPanel implements ActionListener {
       p2Paddle = new Paddle(this, game);
       p1Ball = new Ball(this);
       p2Ball = new Ball(this);
-        level = new Level(9,this);
+        level = new Level(5,this);
     timer = new Timer(1000/100, this);
     timer.start();
 

@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 public class Brick {
 
@@ -19,8 +20,8 @@ public class Brick {
   //endregion
 
   int x, y, rank;
-   int width = 100;
-   int height = 20;
+   static int width = 35;
+   static int height = 20;
 
   public Brick(int x, int y, int rank){
     this.x = x;
@@ -34,15 +35,23 @@ public class Brick {
 
   public void paint(Graphics g){
     g.setColor(colors[rank]);
-    g.fillRect(x, y, 100, 20);
+    g.fillRect(x, y, width, height);
   }
 
-  public int getWidth() {
+  public static int getWidth() {
     return width;
   }
 
-  public int getHeight() {
+  public static int getHeight() {
     return height;
+  }
+
+  public Rectangle getBounds(){
+    return new Rectangle(x , y, width, height);
+  }
+
+  public void checkCollision(Ball ball){
+    //
   }
 
 }
