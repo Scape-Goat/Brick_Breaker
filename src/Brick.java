@@ -21,7 +21,7 @@ boolean paint = true;
 
   int x, y, rank;
    static int width = 50;
-   static int height = 20;
+   static int height = 19;
 
   public Brick(int x, int y, int rank, int width, int height){
     this.width = width;
@@ -32,17 +32,22 @@ boolean paint = true;
   }
 
   public void decreaseRank(){
-    rank-=1;
-    if(rank<0)
-      paint = false;
-
+    if(y>=0) {
+      rank -= 1;
+      if (rank < 0)
+        paint = false;
+    }
   }
 
   public void paint(Graphics g){
     if(paint) {
       g.setColor(colors[rank]);
-      g.fillOval(x, y, width, height);
+      g.fillRect(x, y, width, height);
     }
+  }
+
+  public void move(){
+    y+=height+6;
   }
 
   public static int getWidth() {
@@ -58,8 +63,12 @@ boolean paint = true;
   }
 
   public void checkCollision(Ball ball){
-      if(getBounds().intersects(ball.getBounds()))
+      if(getBounds().intersects(ball.getBounds())) {
+        if(paint)
+          ball.dy*=-1;
         decreaseRank();
+
+      }
 
 
 

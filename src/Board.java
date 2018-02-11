@@ -8,7 +8,7 @@ public class Board extends JPanel implements ActionListener {
     Paddle p1Paddle, p2Paddle;
     Ball p1Ball, p2Ball;
     Timer timer;
-   
+   int levelNum = 1;
    Level level;
 
     //region Colors
@@ -27,15 +27,15 @@ public class Board extends JPanel implements ActionListener {
 
     public Board(Game game){
       //sets the size JFrame.pack should use if its optimal
-      setPreferredSize(new Dimension(800, 800));
+      setPreferredSize(new Dimension(600, 800));
       //sets the background color of the panel
       setBackground(Color.BLACK);
       p1Paddle = new Paddle(this, game);
       p2Paddle = new Paddle(this, game);
       p1Ball = new Ball(this);
       p2Ball = new Ball(this);
-        level = new Level(9,this);
-    timer = new Timer(0, this);
+        level = new Level(levelNum,this);
+    timer = new Timer(1000/100, this);
     timer.start();
 
 
@@ -53,28 +53,36 @@ public class Board extends JPanel implements ActionListener {
     public  void paintComponent(Graphics g){
         super.paintComponent(g);
         g.setColor(lightBlue);
-        g.setFont(new Font(Font.SERIF, Font.BOLD, 20));
-        if(GAMESTATES.isMenu()){
-            printSimpleString("Menu", getWidth(), 0, getHeight()/2, g);
+        g.setFont(new Font(Font.SERIF, Font.BOLD, 90));
+        if(GAMESTATES.isMenu()) {
+          g.setFont(new Font("Times New Roman", Font.BOLD, 36));
+          printSimpleString("Brick Breaker", getWidth(), 0, (int) getHeight() / 3, g);
+          printSimpleString("Press *CONTROL* to change play type.", getWidth(), 0,
+              (int) (getHeight() * (2.0 / 3) - 50), g);
+          printSimpleString("Game Type: " + GAMESTATES.getGameType() + ".", getWidth(), 0,
+              (int) (getHeight() * (2.0 / 3)), g);
+          printSimpleString("Press *SPACE* to start.", getWidth(), 0,
+              (int) (getHeight() * (2. / 3)) + 50, g);
+          //else if(GAMESTATES.isInstruction()){
+          // printSimpleString("Instructions", getWidth(), 0, getHeight()/2, g);
+          //}
         }
-        //else if(GAMESTATES.isInstruction()){
-           // printSimpleString("Instructions", getWidth(), 0, getHeight()/2, g);
-        //}
-
         else if(GAMESTATES.isPause()){
             printSimpleString("Pause", getWidth(), 0, getHeight()/2, g);
         }
-        else if(GAMESTATES.isPlay()){
-            //printSimpleString("Play", getWidth(), 0, getHeight()/2, g);
+        else if(GAMESTATES.isPlay()) {
+          //printSimpleString("Play", getWidth(), 0, getHeight()/2, g);
           g.setColor(Color.blue);
-            //p1Ball.paint(g);
-            //p1Paddle.paint(g);
-            if(GAMESTATES.isMulti()) {
-              g.setColor(lime);
-              p2Ball.paint(g);
-              p2Paddle.paint(g);
-            }
-            level.paint(g);
+          p1Ball.paint(g);
+          p1Paddle.paint(g);
+          if (GAMESTATES.isMulti()) {
+            g.setColor(lime);
+            p2Ball.paint(g);
+            p2Paddle.paint(g);
+          }
+          level.paint(g);
+
+
 
 
         }
@@ -86,7 +94,7 @@ public class Board extends JPanel implements ActionListener {
 
 
 
-
+int ticks = 0;
   @Override
   public void actionPerformed(ActionEvent e) {
       if(GAMESTATES.isPlay()){
@@ -95,13 +103,27 @@ public class Board extends JPanel implements ActionListener {
             level.level[row][column].checkCollision(p1Ball);
           }
         }
+        p1Ball.checkCollision(level);
 
         p1Paddle.move();
         p1Ball.move();
+        p1Ball.checkCollisions(p1Paddle);
+
         if(GAMESTATES.isMulti()) {
             p2Paddle.move2nd();
             p2Ball.move();
         }
+        ticks +=1;
+        if(ticks%1000==0){
+          for(int column = 0; column<level.level[0].length; column++) {
+            for (int row = 0; row < level.level.length; row++) {
+              level.level[row][column].move();
+            }
+          }
+        }
+
+
+
 
 
 
