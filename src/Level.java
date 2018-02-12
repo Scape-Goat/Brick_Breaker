@@ -19,7 +19,7 @@ final  int brickGap = 1;
   public Level(int levelNum,Board board) {
     this.board = board;
     System.out.println("");
-    numInRow = 60 ;
+    numInRow = 10 ;
     numInColumn =200;
     int brickWidth = ((600-brickGap*(numInRow-2))/numInRow);
    // int brickHeight = ((800-brickGap*(numInColumn-1))/numInColumn);
