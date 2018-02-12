@@ -2,7 +2,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 public class Ball {
-  final double  SPEED = 8;
+  final double  SPEED = 5;
   double MAXANGLE = 5*Math.PI/12; //70 degrees
 
 int x, y, diameter = 20;
@@ -49,8 +49,11 @@ double dx= SPEED, dy=SPEED;
         double normalIntersect = relativeIntersect / brickCenter;
         double bounceAngle = MAXANGLE * normalIntersect;
 
-        if(x < level.level[row][column].getWidth()/2)
-        dy *= -1;
+        //if(x < level.level[row][column].getWidth()/2)
+        //dy *= -1;
+
+        //if ()
+
         //if(x > board.getWidth()/2)
           //dy = (int)(SPEED*Math.cos(bounceAngle));
         //dx = (int)(SPEED*-Math.sin(bounceAngle));

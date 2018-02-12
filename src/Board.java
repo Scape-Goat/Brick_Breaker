@@ -74,7 +74,7 @@ public class Board extends JPanel implements ActionListener {
           //printSimpleString("Play", getWidth(), 0, getHeight()/2, g);
           g.setColor(Color.blue);
           p1Ball.paint(g);
-          p1Paddle.paint(g);
+          //p1Paddle.paint(g);
           if (GAMESTATES.isMulti()) {
             g.setColor(lime);
             p2Ball.paint(g);
@@ -107,7 +107,7 @@ int ticks = 0;
 
         p1Paddle.move();
         p1Ball.move();
-        p1Ball.checkCollisions(p1Paddle);
+        //p1Ball.checkCollisions(p1Paddle);
 
         if(GAMESTATES.isMulti()) {
             p2Paddle.move2nd();
