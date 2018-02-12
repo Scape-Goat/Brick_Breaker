@@ -18,8 +18,15 @@ public class GAMESTATES {
 
   private static String GameType = "One Player";
 
+    public static Integer getP1Score() {
+        return p1Score;
+    }
 
-	public static boolean isPlay() {return isPlay;}
+    public static void increaseP1Score(int rank) {
+        p1Score+=(rank*50);
+    }
+
+    public static boolean isPlay() {return isPlay;}
 	public static boolean isPause() {return isPause;}
 	public static boolean isEnd() {return isEnd;}
 	public static boolean isMenu() {return isMenu;}

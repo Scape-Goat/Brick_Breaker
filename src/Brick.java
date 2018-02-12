@@ -3,7 +3,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 public class Brick {
-boolean paint = true;
+boolean paint = true, pointsGiven = false;
 Level level;
 
   //region Colors
@@ -19,7 +19,7 @@ Level level;
   Color[] colors = {red,orange,yellow,lime,green,teal,cyan, lightBlue,blue};
   //endregion
 
-  int x, y, rank;
+  int x, y, currentRank, originalRank;
    static int width = 50;
    static int height = 25;
 
@@ -28,21 +28,25 @@ Level level;
     this.height = height;
     this.x = x;
     this.y=y;
-    this.rank = rank-1;
+    currentRank = rank-1;
+    originalRank = rank;
     this.level = level;
   }
 
   public void decreaseRank(){
     if(y>=0) {
-      rank -= 1;
-      if (rank < 0)
+      currentRank -= 1;
+      if (currentRank < 0 && !pointsGiven) {
         paint = false;
+        pointsGiven = true;
+        GAMESTATES.increaseP1Score(originalRank);
+      }
     }
   }
 
   public void paint(Graphics g){
     if(paint) {
-      g.setColor(colors[rank]);
+      g.setColor(colors[currentRank]);
       g.fillRect(x, y, width, height);
     }
   }
@@ -65,12 +69,15 @@ Level level;
 
   public void checkCollision(Ball ball){
       if(getBounds().intersects(ball.getBounds())) {
-        if(paint) {
+        /*if(paint) {
             if(ball.x+(ball.diameter*(2.0/3))>x && ball.x+(ball.diameter*(1.0/3))<x+width)
             ball.dy *= -1;
             if(ball.y+(ball.diameter*(2.0/3))>y && ball.y+(ball.diameter*(1.0/3))<y+height)
                 ball.dx*=-1;
+
+
         }
+*/
         decreaseRank();
 
 

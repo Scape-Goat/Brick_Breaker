@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Level {
   Brick[][] level;
-  int levelNum;
+
 
   Board board;
 
@@ -19,7 +19,7 @@ final  int brickGap = 1;
   public Level(int levelNum,Board board) {
     this.board = board;
     System.out.println("");
-    numInRow = 10 ;
+    numInRow = 60 ;
     numInColumn =200;
     int brickWidth = ((600-brickGap*(numInRow-2))/numInRow);
    // int brickHeight = ((800-brickGap*(numInColumn-1))/numInColumn);
@@ -28,7 +28,7 @@ final  int brickGap = 1;
 
     System.out.println(numInRow);
       level = new Brick[numInColumn][numInRow];
-      this.levelNum = levelNum;
+
       for(int column = 0; column<level[0].length; column++){
         for(int row = 0; row<level.length; row++){
           level[row][column] = new Brick(brickGap*(column)+(brickWidth*column),(-brickGap*(row))-(Brick.getHeight()*row), levelNum, brickWidth, Brick.getHeight(), this);

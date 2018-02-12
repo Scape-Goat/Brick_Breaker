@@ -8,7 +8,7 @@ public class Board extends JPanel implements ActionListener {
     Paddle p1Paddle, p2Paddle;
     Ball p1Ball, p2Ball;
     Timer timer;
-   int levelNum = 1;
+   int levelNum = 9;
    Level level;
 
     //region Colors
@@ -72,9 +72,10 @@ public class Board extends JPanel implements ActionListener {
         }
         else if(GAMESTATES.isPlay()) {
           //printSimpleString("Play", getWidth(), 0, getHeight()/2, g);
-          g.setColor(Color.blue);
+          g.setColor(Color.white);
           p1Ball.paint(g);
-          //p1Paddle.paint(g);
+          p1Paddle.paint(g);
+          printSimpleString(GAMESTATES.getP1Score().toString(), getWidth(),0,getHeight()/2, g);
           if (GAMESTATES.isMulti()) {
             g.setColor(lime);
             p2Ball.paint(g);
@@ -103,11 +104,11 @@ int ticks = 0;
             level.level[row][column].checkCollision(p1Ball);
           }
         }
-        p1Ball.checkCollision(level);
+        //p1Ball.checkCollision(level);
 
         p1Paddle.move();
         p1Ball.move();
-        //p1Ball.checkCollisions(p1Paddle);
+        p1Ball.checkCollisions(p1Paddle);
 
         if(GAMESTATES.isMulti()) {
             p2Paddle.move2nd();
