@@ -8,7 +8,7 @@ public class Board extends JPanel implements ActionListener {
     Paddle p1Paddle, p2Paddle;
     Ball p1Ball, p2Ball;
     Timer timer;
-   int levelNum = 9;
+   int levelNum = 1;
    Level level;
 
     //region Colors
@@ -115,7 +115,7 @@ int ticks = 0;
             p2Ball.move();
         }
         ticks +=1;
-        if(ticks%1000==0){
+        if(ticks%1==0){
           for(int column = 0; column<level.level[0].length; column++) {
             for (int row = 0; row < level.level.length; row++) {
               level.level[row][column].move();

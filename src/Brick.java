@@ -69,7 +69,7 @@ Level level;
 
   public void checkCollision(Ball ball){
       if(getBounds().intersects(ball.getBounds())) {
-        /*if(paint) {
+        if(paint) {
             if(ball.x+(ball.diameter*(2.0/3))>x && ball.x+(ball.diameter*(1.0/3))<x+width)
             ball.dy *= -1;
             if(ball.y+(ball.diameter*(2.0/3))>y && ball.y+(ball.diameter*(1.0/3))<y+height)
@@ -77,7 +77,7 @@ Level level;
 
 
         }
-*/
+
         decreaseRank();
 
 
