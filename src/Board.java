@@ -42,7 +42,7 @@ public class Board extends JPanel implements ActionListener {
 
     }
     public void GameStart(){
-    //initial rendering position of graphics
+    
     p1Ball.setPosition(getWidth()/2, getHeight()- p1Ball.diameter);
     p1Paddle.setPosition(50,getHeight()-85);
     level.reset();
