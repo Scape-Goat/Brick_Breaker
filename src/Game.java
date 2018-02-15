@@ -6,7 +6,7 @@ import javax.swing.WindowConstants;
 public class Game extends JFrame implements KeyListener {
 
   Board board;
-  private boolean leftPressed, rightPressed, aPressed, dPressed;
+  private boolean leftPressed, rightPressed, aPressed, dPressed, wait;
 
   public Game(){
 
@@ -67,6 +67,8 @@ public class Game extends JFrame implements KeyListener {
       GAMESTATES.stopPause();
       //board.gameRestart();
     }
+    if(e.getKeyCode() == KeyEvent.VK_SPACE && GAMESTATES.isPlay() && wait)
+      wait = false;
   }
 
   @Override
@@ -86,4 +88,9 @@ public class Game extends JFrame implements KeyListener {
   public boolean isRightPressed() {return rightPressed;}
   public boolean isaPressed() {return aPressed;}
   public boolean isdPressed() {return dPressed;}
+  public boolean isWait(){return wait;}
+
+  public void toggleWait(){
+    wait = !wait;
+  }
 }

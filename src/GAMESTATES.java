@@ -12,7 +12,6 @@ public class GAMESTATES {
 
   private static Integer
 	  p1Score = new Integer(0),
-	  p2Score = new Integer(0),
 	  life = new Integer(3),
 	  level = new Integer(1);
 
@@ -21,6 +20,8 @@ public class GAMESTATES {
     public static Integer getP1Score() {
         return p1Score;
     }
+
+    public static void resetScore(){p1Score=0;}
 
     public static void increaseP1Score(int rank) {
         p1Score+=(rank*50);

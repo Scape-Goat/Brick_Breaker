@@ -13,27 +13,26 @@ public class Level {
 final int EDGESPACE = 13;
 final  int brickGap = 1;
 
-  int numInRow, numInColumn;
+
+  int numInRow = 10 ;
+  int numInColumn =200;
+  int brickWidth = ((600-brickGap*(numInRow-2))/numInRow);
 
 
   public Level(int levelNum,Board board) {
     this.board = board;
-    System.out.println("");
-    numInRow = 10 ;
-    numInColumn =200;
-    int brickWidth = ((600-brickGap*(numInRow-2))/numInRow);
+
    // int brickHeight = ((800-brickGap*(numInColumn-1))/numInColumn);
      //brickWidth = (brickWidth-1)/numInRow;
 
 
-    System.out.println(numInRow);
       level = new Brick[numInColumn][numInRow];
 
-      for(int column = 0; column<level[0].length; column++){
-        for(int row = 0; row<level.length; row++){
-          level[row][column] = new Brick(brickGap*(column)+(brickWidth*column),(-brickGap*(row))-(Brick.getHeight()*row), levelNum, brickWidth, Brick.getHeight(), this);
-        }
+    for(int column = 0; column<level[0].length; column++){
+      for(int row = 0; row<level.length; row++){
+        level[row][column] = new Brick(brickGap*(column)+(brickWidth*column),(-brickGap*(row))-(Brick.getHeight()*row), levelNum, brickWidth, Brick.getHeight(), this);
       }
+    }
 
   }
 
@@ -57,6 +56,14 @@ final  int brickGap = 1;
     for(int column = 0; column<level[0].length; column++){
       for(int row = 0; row<level.length; row++){
         level[row][column].paint(g);
+      }
+    }
+  }
+
+  public void reset(){
+    for(int column = 0; column<level[0].length; column++){
+      for(int row = 0; row<level.length; row++){
+        level[row][column] = new Brick(brickGap*(column)+(brickWidth*column),(-brickGap*(row))-(Brick.getHeight()*row), 1, brickWidth, Brick.getHeight(), this);
       }
     }
   }

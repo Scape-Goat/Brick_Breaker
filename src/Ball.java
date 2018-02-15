@@ -7,25 +7,34 @@ public class Ball {
 
 int x, y, diameter = 20;
 double dx= SPEED, dy=SPEED;
+boolean wait = false;
 
     Board board;
+    Game game;
 
 
-    public Ball(Board board){
+    public Ball(Board board, Game game){
         x = 0;
         y = 0;
 
         this.board = board;
+        this.game = game;
     }
 
-    public void move(){
-        if(x<0 || x+diameter>board.getWidth())
-            dx*=-1;
-        if(y<0 || y+diameter>board.getHeight())
-          dy*=-1;
+    public void move(Paddle paddle){
+        if(!game.isWait()) {
+            if (x < 0 || x + diameter > board.getWidth())
+                dx *= -1;
+            if (y < 0 || y + diameter > board.getHeight())
+                dy *= -1;
 
-        x += dx;
-        y+=dy;
+            x += dx;
+            y += dy;
+        }
+        else{
+            x = paddle.x+paddle.width/2-diameter/2;
+            y= paddle.y-diameter;
+        }
     }
 
     public void setPosition(int x, int y){
@@ -70,7 +79,7 @@ double dx= SPEED, dy=SPEED;
     if(getBounds().intersects(other.getBounds())) {
       double paddleX = other.getBounds().getX();
       double paddleCenter = other.getBounds().getWidth() / 2;
-      double ballx = x;
+      double ballx = x+diameter/2;
 
       double relativeIntersect = (paddleX + paddleCenter) - ballx;
       double normalIntersect = relativeIntersect / paddleCenter;
@@ -85,6 +94,13 @@ double dx= SPEED, dy=SPEED;
       dx = (int)(SPEED*-Math.sin(bounceAngle));
 
     }
+  }
+
+
+
+  public void checkLocation(Paddle paddle){
+        if(paddle.getY()<y)
+            game.toggleWait();
   }
 
 

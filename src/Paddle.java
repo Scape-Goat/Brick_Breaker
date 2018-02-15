@@ -43,5 +43,8 @@ public class Paddle {
     g.fillRect(x,y,width,HEIGHT);
   }
 
+    public int getY() {
+        return y;
+    }
 }
 

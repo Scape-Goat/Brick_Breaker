@@ -11,6 +11,8 @@ public class Board extends JPanel implements ActionListener {
    int levelNum = 1;
    Level level;
 
+
+
     //region Colors
   Color red = new Color(255,0,0);
   Color orange = new Color(255,127,0);
@@ -31,12 +33,10 @@ public class Board extends JPanel implements ActionListener {
       //sets the background color of the panel
       setBackground(Color.BLACK);
       p1Paddle = new Paddle(this, game);
-      p2Paddle = new Paddle(this, game);
-      p1Ball = new Ball(this);
-      p2Ball = new Ball(this);
-        level = new Level(levelNum,this);
-    timer = new Timer(1000/100, this);
-    timer.start();
+      p1Ball = new Ball(this, game);
+      level = new Level(levelNum,this);
+      timer = new Timer(1000/50, this);
+      timer.start();
 
 
 
@@ -44,9 +44,11 @@ public class Board extends JPanel implements ActionListener {
     public void GameStart(){
     //initial rendering position of graphics
     p1Ball.setPosition(getWidth()/2, getHeight()- p1Ball.diameter);
-    p1Paddle.setPosition(0,getHeight()-25);
-    p2Paddle.setPosition(0, 25);
+    p1Paddle.setPosition(50,getHeight()-85);
+    level.reset();
+    GAMESTATES.resetScore();
     //creates a timer to control rendering graphics and game updates
+
 
   }
 
@@ -72,15 +74,12 @@ public class Board extends JPanel implements ActionListener {
         }
         else if(GAMESTATES.isPlay()) {
           //printSimpleString("Play", getWidth(), 0, getHeight()/2, g);
+
           g.setColor(Color.white);
+            g.drawLine(0,getHeight()-85 , getWidth(),getHeight()-85  );
           p1Ball.paint(g);
           p1Paddle.paint(g);
-          printSimpleString(GAMESTATES.getP1Score().toString(), getWidth(),0,getHeight()/2, g);
-          if (GAMESTATES.isMulti()) {
-            g.setColor(lime);
-            p2Ball.paint(g);
-            p2Paddle.paint(g);
-          }
+          printSimpleString(GAMESTATES.getP1Score().toString(), getWidth(),0,getHeight()-10, g);
           level.paint(g);
 
 
@@ -104,16 +103,14 @@ int ticks = 0;
             level.level[row][column].checkCollision(p1Ball);
           }
         }
-        //p1Ball.checkCollision(level);
+        p1Ball.checkCollision(level);
+    p1Ball.checkLocation(p1Paddle);
 
         p1Paddle.move();
-        p1Ball.move();
+        p1Ball.move(p1Paddle);
         p1Ball.checkCollisions(p1Paddle);
 
-        if(GAMESTATES.isMulti()) {
-            p2Paddle.move2nd();
-            p2Ball.move();
-        }
+
         ticks +=1;
         if(ticks%1==0){
           for(int column = 0; column<level.level[0].length; column++) {
