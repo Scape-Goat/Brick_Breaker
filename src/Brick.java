@@ -46,7 +46,8 @@ Level level;
 
   public void paint(Graphics g){
     if(paint) {
-      g.setColor(colors[currentRank]);
+      System.out.print(currentRank);
+      g.setColor(colors[8]);
       g.fillRect(x, y, width, height);
     }
   }
@@ -80,7 +81,7 @@ Level level;
 
         decreaseRank();
 
-//k
+
       }
 
 

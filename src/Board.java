@@ -8,7 +8,7 @@ public class Board extends JPanel implements ActionListener {
     Paddle p1Paddle, p2Paddle;
     Ball p1Ball, p2Ball;
     Timer timer;
-   int levelNum = 1;
+   int levelNum = 9;
    Level level;
 
 
@@ -34,6 +34,7 @@ public class Board extends JPanel implements ActionListener {
       setBackground(Color.BLACK);
       p1Paddle = new Paddle(this, game);
       p1Ball = new Ball(this, game);
+      System.out.print(levelNum);
       level = new Level(levelNum,this);
       timer = new Timer(1000/100, this);
       timer.start();
@@ -104,7 +105,7 @@ int ticks = 0;
           }
         }
         p1Ball.checkCollision(level);
-    p1Ball.checkLocation(p1Paddle);
+        p1Ball.checkLocation(p1Paddle);
 
         p1Paddle.move();
         p1Ball.move(p1Paddle);
@@ -112,7 +113,7 @@ int ticks = 0;
 
 
         ticks +=1;
-        if(ticks%500==0){
+        if(ticks%1000==0){
           for(int column = 0; column<level.level[0].length; column++) {
             for (int row = 0; row < level.level.length; row++) {
               level.level[row][column].move();
