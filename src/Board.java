@@ -35,7 +35,7 @@ public class Board extends JPanel implements ActionListener {
       p1Paddle = new Paddle(this, game);
       p1Ball = new Ball(this, game);
       level = new Level(levelNum,this);
-      timer = new Timer(1000/50, this);
+      timer = new Timer(1000/100, this);
       timer.start();
 
 
@@ -112,7 +112,7 @@ int ticks = 0;
 
 
         ticks +=1;
-        if(ticks%1==0){
+        if(ticks%500==0){
           for(int column = 0; column<level.level[0].length; column++) {
             for (int row = 0; row < level.level.length; row++) {
               level.level[row][column].move();
