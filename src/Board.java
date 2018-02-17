@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.*;
 import sun.plugin2.util.ColorUtil.ColorRGB;
 
@@ -8,8 +9,9 @@ public class Board extends JPanel implements ActionListener {
     Paddle p1Paddle, p2Paddle;
     Ball p1Ball, p2Ball;
     Timer timer;
-   int levelNum = 9;
+   int levelNum = 1;
    Level level;
+   ArrayList<Power_Up> PowerUps = new ArrayList<Power_Up>();
 
 
 
@@ -34,7 +36,6 @@ public class Board extends JPanel implements ActionListener {
       setBackground(Color.BLACK);
       p1Paddle = new Paddle(this, game);
       p1Ball = new Ball(this, game);
-      System.out.print(levelNum);
       level = new Level(levelNum,this);
       timer = new Timer(1000/100, this);
       timer.start();
@@ -46,7 +47,7 @@ public class Board extends JPanel implements ActionListener {
 
     p1Ball.setPosition(getWidth()/2, getHeight()- p1Ball.diameter);
     p1Paddle.setPosition(50,getHeight()-85);
-    level.reset();
+    //level.reset();
     GAMESTATES.resetScore();
     //creates a timer to control rendering graphics and game updates
 
@@ -82,6 +83,10 @@ public class Board extends JPanel implements ActionListener {
           p1Paddle.paint(g);
           printSimpleString(GAMESTATES.getP1Score().toString(), getWidth(),0,getHeight()-10, g);
           level.paint(g);
+          for (Power_Up powerUp: PowerUps){
+            g.setColor(Color.white);
+            powerUp.paint(g);
+          }
 
 
 
@@ -99,11 +104,15 @@ int ticks = 0;
   @Override
   public void actionPerformed(ActionEvent e) {
       if(GAMESTATES.isPlay()){
+
         for(int column = 0; column<level.level[0].length; column++) {
           for (int row = 0; row < level.level.length; row++) {
-            level.level[row][column].checkCollision(p1Ball);
+            level.level[row][column].checkCollision(p1Ball,PowerUps ,p1Paddle);
           }
         }
+
+
+
         p1Ball.checkCollision(level);
         p1Ball.checkLocation(p1Paddle);
 
@@ -121,7 +130,15 @@ int ticks = 0;
           }
         }
 
+        for (Power_Up powerUp: PowerUps){
+          powerUp.move();
+          powerUp.checkCollision(p1Paddle, p1Ball, this);
 
+        }
+
+        if(ticks%500==0){
+          p1Ball.normal();
+        }
 
 
 

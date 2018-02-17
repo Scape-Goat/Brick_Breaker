@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.util.ArrayList;
 
 public class Brick {
 boolean paint = true, pointsGiven = false;
@@ -19,35 +20,41 @@ Level level;
   Color[] colors = {red,orange,yellow,lime,green,teal,cyan, lightBlue,blue};
   //endregion
 
-  int x, y, currentRank, originalRank;
-   static int width = 50;
+  int x, y, rank, originalRank;
+   static int width;
    static int height = 25;
 
   public Brick(int x, int y, int rank, int width, int height, Level level){
     this.width = width;
     this.height = height;
     this.x = x;
-    this.y=y;
-    currentRank = rank-1;
+    this.y = y;
+
+
+
+    this.rank = rank-1;
+
     originalRank = rank;
     this.level = level;
   }
 
-  public void decreaseRank(){
+  public void decreaseRank(Ball ball, ArrayList<Power_Up> PowerUps, Paddle paddle){
     if(y>=0) {
-      currentRank -= 1;
-      if (currentRank < 0 && !pointsGiven) {
+      rank -= 1;
+      if (rank < 0 && !pointsGiven) {
         paint = false;
         pointsGiven = true;
         GAMESTATES.increaseP1Score(originalRank);
+        if((int)(Math.random()*10)==1)
+        PowerUps.add(new Power_Up(paddle,ball,x,y));
       }
     }
   }
 
   public void paint(Graphics g){
     if(paint) {
-      System.out.print(currentRank);
-      g.setColor(colors[8]);
+      g.setColor(colors[rank]);
+
       g.fillRect(x, y, width, height);
     }
   }
@@ -68,18 +75,23 @@ Level level;
     return new Rectangle(x , y, width, height);
   }
 
-  public void checkCollision(Ball ball){
+  public void checkCollision(Ball ball, ArrayList<Power_Up> PowerUps, Paddle paddle){
       if(getBounds().intersects(ball.getBounds())) {
         if(paint) {
-            if(ball.x+(ball.diameter*(2.0/3))>x && ball.x+(ball.diameter*(1.0/3))<x+width)
-            ball.dy *= -1;
-            if(ball.y+(ball.diameter*(2.0/3))>y && ball.y+(ball.diameter*(1.0/3))<y+height)
-                ball.dx*=-1;
-
+            if(ball.getStatus() != "piercing") {
+              if (ball.x + (ball.diameter * (2.0 / 3)) > x
+                  && ball.x + (ball.diameter * (1.0 / 3)) < x + width)
+                ball.dy *= -1;
+              if (ball.y + (ball.diameter * (2.0 / 3)) > y
+                  && ball.y + (ball.diameter * (1.0 / 3)) < y + height)
+                ball.dx *= -1;
+            }
 
         }
 
-        decreaseRank();
+        if(ball.getStatus() != "dulled")
+          decreaseRank(ball,PowerUps, paddle);
+
 
 
       }

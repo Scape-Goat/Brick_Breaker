@@ -2,12 +2,13 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 public class Ball {
-  final double  SPEED = 5;
+  double  SPEED = 5;
   double MAXANGLE = 5*Math.PI/12; //70 degrees
 
-int x, y, diameter = 20;
+int x, y, diameter = 15;
 double dx= SPEED, dy=SPEED;
 boolean wait = false;
+String status = "piercing";
 
     Board board;
     Game game;
@@ -95,6 +96,42 @@ boolean wait = false;
 
     }
   }
+
+  public void sizeGrow(){
+      diameter = 20;
+  }
+  public void sizeShrink(){
+    diameter = 10;
+  }
+  public void sizeReset(){
+    diameter = 15;
+  }
+
+  public void piercing(){
+      status = "piercing";
+  }
+  public void dulled(){
+    status = "dulled";
+  }
+  public void normal(){
+      status = "normal";
+  }
+  public String getStatus(){
+      return status;
+  }
+
+  public void speedUp(){
+      SPEED = 7;
+  }
+
+  public void slowDown(){
+      SPEED =3;
+  }
+
+  public void speedReset(){
+      SPEED = 5;
+  }
+
 
 
 

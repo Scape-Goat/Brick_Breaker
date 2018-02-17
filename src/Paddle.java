@@ -23,13 +23,27 @@ public class Paddle {
           x += dx;
   }
 
-  public void move2nd(){
-        if(game.isLeftPressed() && x > 0)
-            x -= dx;
-        else if (game.isRightPressed() && x+width<board.getWidth())
-            x += dx;
-
+  public void sizeGrow(){
+    width = 150;
   }
+  public void sizeShrink(){
+    width = 50;
+  }
+  public void sizeReset(){
+    width = 100;
+  }
+
+  public void speedUp(){
+    dx = 6;
+  }
+  public void slowDown(){
+    dx = 4;
+  }
+  public void speedReset(){
+    dx=5;
+  }
+
+
   public Rectangle getBounds(){
       return new Rectangle(x,y,width, HEIGHT);
   }
