@@ -13,6 +13,7 @@ public class Board extends JPanel implements ActionListener {
    Level level;
    ArrayList<Power_Up> PowerUps = new ArrayList<Power_Up>();
 
+   int[] powerUpTicks = new int[5];
 
 
     //region Colors
@@ -136,8 +137,16 @@ int ticks = 0;
 
         }
 
-        if(ticks%500==0){
-          p1Ball.normal();
+        for(int i = 0; i<powerUpTicks.length; i++){
+            if(ticks-powerUpTicks[i]==1000){
+                switch(i){
+                    case 0: p1Paddle.sizeReset(); break;
+                    case 1: p1Paddle.speedReset(); break;
+                    case 2: p1Ball.sizeReset(); break;
+                    case 3: p1Ball.normal(); break;
+                    case 4: p1Ball.speedReset(); break;
+                }
+            }
         }
 
 

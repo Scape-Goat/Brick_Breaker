@@ -9,7 +9,7 @@ public class Power_Up {
 
 
   public Power_Up(Paddle paddle, Ball ball, int x, int y){
-    type = (int)(Math.random()*15)+1;
+    type = (int)(Math.random()*9);
 
 
     this.x = x;
@@ -39,25 +39,21 @@ public class Power_Up {
   public void checkCollision(Paddle paddle, Ball ball, Board board){
     if(getBounds().intersects(paddle.getBounds()) && paint){
       switch(type){
-        case 1: paddle.sizeGrow(); break;
-        case 2: paddle.sizeShrink(); break;
-        case 3: paddle.sizeReset(); break;
+        case 0: paddle.sizeGrow(); break;
+        case 1: paddle.sizeShrink(); break;
 
-        case 4: paddle.speedUp(); break;
-        case 5: paddle.slowDown(); break;
-        case 6: paddle.speedReset(); break;
+        case 2: paddle.speedUp(); break;
+        case 3: paddle.slowDown(); break;
 
-        case 7: ball.sizeGrow(); break;
-        case 8: ball.sizeShrink(); break;
-        case 9: ball.sizeReset(); break;
+        case 4: ball.sizeGrow(); break;
+        case 5: ball.sizeShrink(); break;
 
-        case 10: ball.piercing(); break;
-       // case 11: ball.dulled(); break;
-        case 12: ball.normal(); break;
+        case 6: ball.piercing(); break;
+        case 7: ball.dulled(); break;
 
-        case 13: ball.speedUp(); break;
-        case 14: ball.slowDown(); break;
-        case 15: ball.speedReset(); break;
+        case 8: ball.speedUp(); break;
+        case 9: ball.slowDown(); break;
+
 
         //case 16:  break;
         // case 17:  break;
@@ -69,6 +65,7 @@ public class Power_Up {
 
       }
       paint = false;
+      board.powerUpTicks[type/2] = board.ticks;
       System.out.println(type);
 
     }

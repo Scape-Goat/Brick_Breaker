@@ -39,6 +39,7 @@ public class Paddle {
   public void slowDown(){
     dx = 4;
   }
+
   public void speedReset(){
     dx=5;
   }
