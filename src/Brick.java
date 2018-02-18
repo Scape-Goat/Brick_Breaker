@@ -45,7 +45,7 @@ Level level;
         paint = false;
         pointsGiven = true;
         GAMESTATES.increaseP1Score(originalRank);
-        if((int)(Math.random()*10)==1)
+        if((int)(Math.random()*5)==1)
         PowerUps.add(new Power_Up(paddle,ball,x,y));
       }
     }

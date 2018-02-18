@@ -58,7 +58,7 @@ public class Board extends JPanel implements ActionListener {
     public  void paintComponent(Graphics g){
         super.paintComponent(g);
         g.setColor(lightBlue);
-        g.setFont(new Font(Font.SERIF, Font.BOLD, 90));
+        g.setFont(new Font(Font.SERIF, Font.BOLD, 45));
         if(GAMESTATES.isMenu()) {
           g.setFont(new Font("Times New Roman", Font.BOLD, 36));
           printSimpleString("Brick Breaker", getWidth(), 0, (int) getHeight() / 3, g);
