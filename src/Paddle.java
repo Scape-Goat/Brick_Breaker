@@ -29,21 +29,29 @@ public class Paddle {
   public void sizeShrink(){
     width = 50;
   }
-  public void sizeReset(){
-    width = 100;
+  public void sizeReset(){ width = 100; }
+
+  public String getSizeStatus(){
+    switch(width){
+      case 50: return "Short";
+      case 100: return  "Normal";
+      case 150: return "Long";
+      default: return "It broke";
+    }
   }
 
-  public void speedUp(){
-    dx = 6;
-  }
-  public void slowDown(){
-    dx = 4;
-  }
+  public void speedUp(){ dx = 6; }
+  public void slowDown(){ dx = 4; }
+  public void speedReset(){ dx=5; }
 
-  public void speedReset(){
-    dx=5;
+  public String getSpeedStatus(){
+    switch(dx){
+      case 4: return "Slow";
+      case 5: return  "Normal";
+      case 6: return "Fast";
+      default: return "It broke";
+    }
   }
-
 
   public Rectangle getBounds(){
       return new Rectangle(x,y,width, HEIGHT);

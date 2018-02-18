@@ -78,7 +78,7 @@ Level level;
   public void checkCollision(Ball ball, ArrayList<Power_Up> PowerUps, Paddle paddle){
       if(getBounds().intersects(ball.getBounds())) {
         if(paint) {
-            if(ball.getStatus() != "piercing") {
+            if(ball.getBreakingStatus() != "Piercing") {
               if (ball.x + (ball.diameter * (2.0 / 3)) > x
                   && ball.x + (ball.diameter * (1.0 / 3)) < x + width)
                 ball.dy *= -1;
@@ -89,7 +89,7 @@ Level level;
 
         }
 
-        if(ball.getStatus() != "dulled")
+        if(ball.getBreakingStatus() != "Dulled")
           decreaseRank(ball,PowerUps, paddle);
 
 

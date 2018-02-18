@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Power_Up {
 
-  int x, y, type, width = 50, height = 50;
+  int x, y, type, width = 50, height = 25;
   boolean paint = true;
 
 

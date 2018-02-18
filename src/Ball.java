@@ -8,7 +8,7 @@ public class Ball {
 int x, y, diameter = 15;
 double dx= SPEED, dy=SPEED;
 boolean wait = false;
-String status = "piercing";
+String status = "Normal";
 
     Board board;
     Game game;
@@ -103,35 +103,47 @@ String status = "piercing";
   public void sizeShrink(){
     diameter = 10;
   }
-  public void sizeReset(){
-    diameter = 15;
+  public void sizeReset(){ diameter = 15; }
+  public String getSizeStatus(){
+      switch(diameter){
+          case 10: return "Small";
+          case 15: return "Normal";
+          case 20: return "Large";
+          default: return "It broke";
+      }
   }
 
   public void piercing(){
-      status = "piercing";
+      status = "Piercing";
   }
   public void dulled(){
-    status = "dulled";
+    status = "Dulled";
   }
   public void normal(){
-      status = "normal";
+      status = "Normal";
   }
-  public String getStatus(){
+  public String getBreakingStatus(){
       return status;
   }
 
   public void speedUp(){
       SPEED = 7;
   }
-
   public void slowDown(){
       SPEED =3;
   }
-
   public void speedReset(){
       SPEED = 5;
   }
 
+  public String getSpeedStatus(){
+        switch((int)SPEED){
+            case 3: return "Slow";
+            case 5: return "Normal";
+            case 7: return "Fast";
+            default: return "It broke";
+        }
+  }
 
 
 

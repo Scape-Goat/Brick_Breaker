@@ -58,7 +58,7 @@ public class Board extends JPanel implements ActionListener {
     public  void paintComponent(Graphics g){
         super.paintComponent(g);
         g.setColor(lightBlue);
-        g.setFont(new Font(Font.SERIF, Font.BOLD, 45));
+        g.setFont(new Font(Font.SERIF, Font.BOLD, 20));
         if(GAMESTATES.isMenu()) {
           g.setFont(new Font("Times New Roman", Font.BOLD, 36));
           printSimpleString("Brick Breaker", getWidth(), 0, (int) getHeight() / 3, g);
@@ -83,6 +83,16 @@ public class Board extends JPanel implements ActionListener {
           p1Ball.paint(g);
           p1Paddle.paint(g);
           printSimpleString(GAMESTATES.getP1Score().toString(), getWidth(),0,getHeight()-10, g);
+          g.drawString("Ball Status",0,getHeight()-65);
+          g.drawString("Size: " + p1Ball.getSizeStatus(), 0, getHeight()-45);
+          g.drawString("Speed: " + p1Ball.getSpeedStatus(), 0, getHeight()-25);
+          g.drawString("Breaking: " + p1Ball.getBreakingStatus(),0, getHeight()-5);
+
+          printFromRight("Paddle Status", getWidth(), getHeight()-65, g);
+          printFromRight("Size: " + p1Paddle.getSizeStatus(), getWidth(), getHeight()-45, g);
+          printFromRight("Speed: " + p1Paddle.getSpeedStatus(), getWidth(), getHeight()-25, g);
+
+
           level.paint(g);
           for (Power_Up powerUp: PowerUps){
             g.setColor(Color.white);
@@ -167,4 +177,14 @@ int ticks = 0;
 
         g2d.drawString(s, start + XPos, YPos);
     }
+
+    private void printFromRight(String s, int XPos, int YPos, Graphics g2d){
+
+        int stringLen = (int)g2d.getFontMetrics().getStringBounds(s, g2d).getWidth();
+
+
+        g2d.drawString(s, XPos-stringLen, YPos);
+    }
+
+
 }
