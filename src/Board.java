@@ -13,7 +13,7 @@ public class Board extends JPanel implements ActionListener {
    Level level;
    ArrayList<Power_Up> PowerUps = new ArrayList<Power_Up>();
 
-   int[] powerUpTicks = new int[5];
+   int[] powerUpTicks = new int[6];
 
 
     //region Colors
@@ -155,6 +155,7 @@ int ticks = 0;
                     case 2: p1Ball.sizeReset(); break;
                     case 3: p1Ball.normal(); break;
                     case 4: p1Ball.speedReset(); break;
+                    case 5: GAMESTATES.setMultiplier(1); break;
                 }
             }
         }

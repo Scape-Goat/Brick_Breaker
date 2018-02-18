@@ -9,7 +9,7 @@ public class Power_Up {
 
 
   public Power_Up(Paddle paddle, Ball ball, int x, int y){
-    type = (int)(Math.random()*9);
+    type = (int)(Math.random()*12);
 
 
     this.x = x;
@@ -55,8 +55,8 @@ public class Power_Up {
         case 9: ball.slowDown(); break;
 
 
-        //case 16:  break;
-        // case 17:  break;
+        case 10: GAMESTATES.setMultiplier(2);  break;
+        case 11:  GAMESTATES.setMultiplier(4); break;
         //case 18: paddle.sizeReset(); break;
 
         //case 19:  break;

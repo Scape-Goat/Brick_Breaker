@@ -127,13 +127,26 @@ String status = "Normal";
   }
 
   public void speedUp(){
+      double angleX = (dx/SPEED);
+      double angleY = (dy/SPEED);
       SPEED = 7;
+      dx = SPEED*angleX;
+      dy = SPEED*angleY;
+
   }
   public void slowDown(){
-      SPEED =3;
+    double angleX = (dx/SPEED);
+    double angleY = (dy/SPEED);
+    SPEED = 3;
+    dx = SPEED*angleX;
+    dy = SPEED*angleY;
   }
   public void speedReset(){
-      SPEED = 5;
+    double angleX = (dx/SPEED);
+    double angleY = (dy/SPEED);
+    SPEED = 5;
+    dx = SPEED*angleX;
+    dy = SPEED*angleY;
   }
 
   public String getSpeedStatus(){

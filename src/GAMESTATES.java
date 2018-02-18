@@ -12,8 +12,9 @@ public class GAMESTATES {
 
   private static Integer
 	  p1Score = new Integer(0),
-	  life = new Integer(3),
-	  level = new Integer(1);
+	  life = new Integer(3);
+
+  private static int multiplier = 1;
 
   private static String GameType = "One Player";
 
@@ -23,8 +24,12 @@ public class GAMESTATES {
 
     public static void resetScore(){p1Score=0;}
 
+    public static void setMultiplier(int num){
+      multiplier = num;
+    }
+
     public static void increaseP1Score(int rank) {
-        p1Score+=(rank*50);
+        p1Score+=(rank*50*multiplier);
     }
 
     public static boolean isPlay() {return isPlay;}
