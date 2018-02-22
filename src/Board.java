@@ -48,7 +48,8 @@ public class Board extends JPanel implements ActionListener {
 
     p1Ball.setPosition(getWidth()/2, getHeight()- p1Ball.diameter);
     p1Paddle.setPosition(50,getHeight()-85);
-    //level.reset();
+    level.reset(false);
+
     GAMESTATES.resetScore();
     //creates a timer to control rendering graphics and game updates
 

@@ -23,7 +23,7 @@ String status = "Normal";
     }
 
     public void move(Paddle paddle){
-        if(!game.isWait()) {
+        if(!game.isWait() && GAMESTATES.isPlay()) {
             if (x < 0 || x + diameter > board.getWidth())
                 dx *= -1;
             if (y < 0 || y + diameter > board.getHeight())
@@ -161,7 +161,7 @@ String status = "Normal";
 
 
   public void checkLocation(Paddle paddle){
-        if(paddle.getY()<y)
+        if(paddle.getY()<y+(diameter*(2.0/3)))
             game.toggleWait();
   }
 

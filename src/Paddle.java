@@ -17,9 +17,9 @@ public class Paddle {
   }
 
   public void move(){
-      if(game.isaPressed() && x > 0)
+      if(game.isLeft() && x > 0)
           x -= dx;
-      else if (game.isdPressed() && x+width<board.getWidth())
+      if (game.isRight() && x+width<board.getWidth())
           x += dx;
   }
 

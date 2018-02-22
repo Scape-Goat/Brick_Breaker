@@ -6,7 +6,7 @@ import javax.swing.WindowConstants;
 public class Game extends JFrame implements KeyListener {
 
   Board board;
-  private boolean leftPressed, rightPressed, aPressed, dPressed, wait;
+  private boolean leftPressed, rightPressed, left, right, wait;
 
   public Game(){
 
@@ -44,17 +44,13 @@ public class Game extends JFrame implements KeyListener {
 
   @Override
   public void keyPressed(KeyEvent e) {
-    if(e.getKeyCode() == KeyEvent.VK_LEFT) leftPressed = true;
 
-    if(e.getKeyCode() == KeyEvent.VK_RIGHT) rightPressed = true;
+    if(e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT) left = true;
 
-    if(e.getKeyCode() == KeyEvent.VK_A) aPressed = true;
-
-    if(e.getKeyCode() == KeyEvent.VK_D) dPressed = true;
+    if(e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT) right = true;
 
     if(e.getKeyCode() == KeyEvent.VK_ESCAPE)GAMESTATES.startMenu();
 
-      if(e.getKeyCode() == KeyEvent.VK_CONTROL && GAMESTATES.isMenu()) GAMESTATES.toggleGameType();
 
     if(e.getKeyCode() == KeyEvent.VK_P && (GAMESTATES.isPlay()|| GAMESTATES.isPause())) {
       GAMESTATES.togglePause();
@@ -73,22 +69,17 @@ public class Game extends JFrame implements KeyListener {
 
   @Override
   public void keyReleased(KeyEvent e) {
-    if(e.getKeyCode() == KeyEvent.VK_LEFT) leftPressed = false;
+    if(e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT) left = false;
 
-    if(e.getKeyCode() == KeyEvent.VK_RIGHT) rightPressed = false;
-
-    if(e.getKeyCode() == KeyEvent.VK_A) aPressed = false;
-
-    if(e.getKeyCode() == KeyEvent.VK_D) dPressed = false;
+    if(e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT) right = false;
 
 
   }
 
-  public boolean isLeftPressed() {return leftPressed;}
-  public boolean isRightPressed() {return rightPressed;}
-  public boolean isaPressed() {return aPressed;}
-  public boolean isdPressed() {return dPressed;}
+  public boolean isLeft() {return left;}
+  public boolean isRight() {return right;}
   public boolean isWait(){return wait;}
+
 
   public void toggleWait(){
     wait = !wait;
