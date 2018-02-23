@@ -46,7 +46,7 @@ public class Board extends JPanel implements ActionListener {
     }
     public void GameStart(){
 
-    p1Ball.setPosition(getWidth()/2, getHeight()- p1Ball.diameter);
+    p1Ball.setPosition(getWidth()/2, getHeight()- p1Ball.getDiameter());
     p1Paddle.setPosition(50,getHeight()-85);
     level.reset(false);
 
@@ -63,12 +63,7 @@ public class Board extends JPanel implements ActionListener {
         if(GAMESTATES.isMenu()) {
           g.setFont(new Font("Times New Roman", Font.BOLD, 36));
           printSimpleString("Brick Breaker", getWidth(), 0, (int) getHeight() / 3, g);
-          printSimpleString("Press *CONTROL* to change play type.", getWidth(), 0,
-              (int) (getHeight() * (2.0 / 3) - 50), g);
-          printSimpleString("Game Type: " + GAMESTATES.getGameType() + ".", getWidth(), 0,
-              (int) (getHeight() * (2.0 / 3)), g);
-          printSimpleString("Press *SPACE* to start.", getWidth(), 0,
-              (int) (getHeight() * (2. / 3)) + 50, g);
+          printSimpleString("Press *SPACE* to start.", getWidth(), 0, (int)(getHeight() * (2.0 / 3)) + 50, g);
           //else if(GAMESTATES.isInstruction()){
           // printSimpleString("Instructions", getWidth(), 0, getHeight()/2, g);
           //}
@@ -107,7 +102,8 @@ public class Board extends JPanel implements ActionListener {
 
         }
         else{
-
+            g.setFont(new Font(Font.SERIF, Font.BOLD, 90));
+            printSimpleString("Game Over", getWidth(), 0, getHeight()/2, g);
         }
 
     }
@@ -125,8 +121,6 @@ int ticks = 0;
           }
         }
 
-
-
         p1Ball.checkCollision(level);
         p1Ball.checkLocation(p1Paddle);
 
@@ -140,6 +134,7 @@ int ticks = 0;
           for(int column = 0; column<level.level[0].length; column++) {
             for (int row = 0; row < level.level.length; row++) {
               level.level[row][column].move();
+              level.level[row][column].checkLocation(p1Paddle, p1Ball);
             }
           }
         }
@@ -174,19 +169,13 @@ int ticks = 0;
   }
 
     private void printSimpleString(String s, int width, int XPos, int YPos, Graphics g2d){
-
         int stringLen = (int)g2d.getFontMetrics().getStringBounds(s, g2d).getWidth();
-
         int start = width/2 - stringLen/2;
-
         g2d.drawString(s, start + XPos, YPos);
     }
 
     private void printFromRight(String s, int XPos, int YPos, Graphics g2d){
-
         int stringLen = (int)g2d.getFontMetrics().getStringBounds(s, g2d).getWidth();
-
-
         g2d.drawString(s, XPos-stringLen, YPos);
     }
 

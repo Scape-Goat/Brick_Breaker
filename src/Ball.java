@@ -7,7 +7,6 @@ public class Ball {
 
 int x, y, diameter = 15;
 double dx= SPEED, dy=SPEED;
-boolean wait = false;
 String status = "Normal";
 
     Board board;
@@ -86,13 +85,9 @@ String status = "Normal";
       double normalIntersect = relativeIntersect / paddleCenter;
       double bounceAngle = MAXANGLE * normalIntersect;
 
-      //if(x < board.getWidth()/2){
         dy = (int)(-SPEED*Math.cos(bounceAngle));
-      //}
-      //if(x > board.getWidth()/2){
-        //dx = (int)(SPEED*-Math.cos(bounceAngle));
-      //}
-      dx = (int)(SPEED*-Math.sin(bounceAngle));
+
+        dx = (int)(SPEED*-Math.sin(bounceAngle));
 
     }
   }
@@ -103,7 +98,7 @@ String status = "Normal";
   public void sizeShrink(){
     diameter = 10;
   }
-  public void sizeReset(){ diameter = 10; }
+  public void sizeReset(){ diameter = 15; }
   public String getSizeStatus(){
       switch(diameter){
           case 10: return "Small";
@@ -167,4 +162,8 @@ String status = "Normal";
       }
 
   }
+
+    public int getDiameter() {
+        return diameter;
+    }
 }

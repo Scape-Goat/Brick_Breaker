@@ -59,9 +59,7 @@ Level level;
     }
   }
 
-  public void move(){
-    y+=height+level.getBrickGap();
-  }
+  public void move(){ y+=height+level.getBrickGap(); }
 
   public static int getWidth() {
     return width;
@@ -79,26 +77,23 @@ Level level;
       if(getBounds().intersects(ball.getBounds())) {
         if(paint && y>=0) {
             if(ball.getBreakingStatus() != "Piercing") {
-              if (ball.x + (ball.diameter * (2.0 / 3)) > x
-                  && ball.x + (ball.diameter * (1.0 / 3)) < x + width)
+              if (ball.x + (ball.getDiameter() * (2.0 / 3)) > x
+                  && ball.x + (ball.getDiameter() * (1.0 / 3)) < x + width)
                 ball.dy *= -1;
-              if (ball.y + (ball.diameter * (2.0 / 3)) > y
-                  && ball.y + (ball.diameter * (1.0 / 3)) < y + height)
+              if (ball.y + (ball.getDiameter() * (2.0 / 3)) > y
+                  && ball.y + (ball.getDiameter() * (1.0 / 3)) < y + height)
                 ball.dx *= -1;
             }
-
         }
-
         if(ball.getBreakingStatus() != "Dulled")
           decreaseRank(ball,PowerUps, paddle);
-
-
-
       }
+  }
 
-
-
-    }
+  public void checkLocation(Paddle paddle, Ball ball){
+      if(paint && y+height >= paddle.getY()-ball.getDiameter() )
+          GAMESTATES.endGame();
+  }
 
 
 }

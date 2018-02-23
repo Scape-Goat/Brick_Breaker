@@ -54,7 +54,7 @@ public class GAMESTATES {
     public static void stopMenu(){isMenu = false;}
     public static void startPause(){isPause = true;}
     public static void stopPause(){isPause = false;}
-    public static void endGame(){ isEnd = true;}
+    public static void endGame(){ isEnd = true; stopPlay();}
     public static void startGame(){isEnd = false;}
 
 
