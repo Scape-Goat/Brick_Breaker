@@ -3,7 +3,7 @@ import java.awt.Rectangle;
 
 public class Ball {
   double  SPEED = 5;
-  double MAXANGLE = 5*Math.PI/12; //70 degrees
+  double MAXANGLE = 3*Math.PI/12; //70 degrees
 
 int x, y, diameter = 15;
 double dx= SPEED, dy=SPEED;
@@ -103,7 +103,7 @@ String status = "Normal";
   public void sizeShrink(){
     diameter = 10;
   }
-  public void sizeReset(){ diameter = 15; }
+  public void sizeReset(){ diameter = 10; }
   public String getSizeStatus(){
       switch(diameter){
           case 10: return "Small";
@@ -129,7 +129,7 @@ String status = "Normal";
   public void speedUp(){
       double angleX = (dx/SPEED);
       double angleY = (dy/SPEED);
-      SPEED = 7;
+      SPEED = 6;
       dx = SPEED*angleX;
       dy = SPEED*angleY;
 
@@ -137,7 +137,7 @@ String status = "Normal";
   public void slowDown(){
     double angleX = (dx/SPEED);
     double angleY = (dy/SPEED);
-    SPEED = 3;
+    SPEED = 4;
     dx = SPEED*angleX;
     dy = SPEED*angleY;
   }
@@ -151,19 +151,20 @@ String status = "Normal";
 
   public String getSpeedStatus(){
         switch((int)SPEED){
-            case 3: return "Slow";
+            case 4: return "Slow";
             case 5: return "Normal";
-            case 7: return "Fast";
+            case 6: return "Fast";
             default: return "It broke";
         }
   }
 
 
 
-  public void checkLocation(Paddle paddle){
-        if(paddle.getY()<y+(diameter*(2.0/3)))
-            game.toggleWait();
+  public void checkLocation(Paddle paddle) {
+      if (paddle.getY()+5 < y + diameter) {
+          game.toggleWait();
+            System.out.print("Ball Dead");
+      }
+
   }
-
-
 }

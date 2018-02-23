@@ -38,7 +38,7 @@ public class Board extends JPanel implements ActionListener {
       p1Paddle = new Paddle(this, game);
       p1Ball = new Ball(this, game);
       level = new Level(levelNum,this);
-      timer = new Timer(1000/100, this);
+      timer = new Timer(1000/60, this);
       timer.start();
 
 
@@ -83,7 +83,7 @@ public class Board extends JPanel implements ActionListener {
             g.drawLine(0,getHeight()-85 , getWidth(),getHeight()-85  );
           p1Ball.paint(g);
           p1Paddle.paint(g);
-          printSimpleString(GAMESTATES.getP1Score().toString(), getWidth(),0,getHeight()-10, g);
+
           g.drawString("Ball Status",0,getHeight()-65);
           g.drawString("Size: " + p1Ball.getSizeStatus(), 0, getHeight()-45);
           g.drawString("Speed: " + p1Ball.getSpeedStatus(), 0, getHeight()-25);
@@ -93,6 +93,8 @@ public class Board extends JPanel implements ActionListener {
           printFromRight("Size: " + p1Paddle.getSizeStatus(), getWidth(), getHeight()-45, g);
           printFromRight("Speed: " + p1Paddle.getSpeedStatus(), getWidth(), getHeight()-25, g);
 
+            g.setFont(new Font(Font.SERIF, Font.BOLD, 90));
+          printSimpleString(GAMESTATES.getP1Score().toString(), getWidth(),0,getHeight()-10, g);
 
           level.paint(g);
           for (Power_Up powerUp: PowerUps){
@@ -134,7 +136,7 @@ int ticks = 0;
 
 
         ticks +=1;
-        if(ticks%1000==0){
+        if(ticks%600==0){
           for(int column = 0; column<level.level[0].length; column++) {
             for (int row = 0; row < level.level.length; row++) {
               level.level[row][column].move();

@@ -52,7 +52,7 @@ Level level;
   }
 
   public void paint(Graphics g){
-    if(paint) {
+    if(paint && y>=0) {
       g.setColor(colors[rank]);
 
       g.fillRect(x, y, width, height);
@@ -77,7 +77,7 @@ Level level;
 
   public void checkCollision(Ball ball, ArrayList<Power_Up> PowerUps, Paddle paddle){
       if(getBounds().intersects(ball.getBounds())) {
-        if(paint) {
+        if(paint && y>=0) {
             if(ball.getBreakingStatus() != "Piercing") {
               if (ball.x + (ball.diameter * (2.0 / 3)) > x
                   && ball.x + (ball.diameter * (1.0 / 3)) < x + width)
