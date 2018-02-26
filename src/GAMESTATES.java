@@ -6,9 +6,7 @@ public class GAMESTATES {
     private static boolean  isPause = false;
     private static boolean  isEnd = false;
     private static boolean  isMenu = true;
-    private static boolean  isMulti = false;
-    private  static boolean isInstruction = false;
-    private static String gameType = "Player VS AI";
+    private static String gameOver = "You Win";
 
   private static Integer
 	  p1Score = new Integer(0),
@@ -16,7 +14,7 @@ public class GAMESTATES {
 
   private static int multiplier = 1;
 
-  private static String GameType = "One Player";
+
 
     public static Integer getP1Score() {
         return p1Score;
@@ -36,17 +34,15 @@ public class GAMESTATES {
 	public static boolean isPause() {return isPause;}
 	public static boolean isEnd() {return isEnd;}
 	public static boolean isMenu() {return isMenu;}
-	public static boolean isMulti() {return isMulti;}
-    public static boolean isInstruction() {return isInstruction;}
 
-    public static String getGameType() {return gameType;}
+
+
 
 
 	public static void togglePlay(){isPlay = !isPlay;}
-	public static void toggleMulti(){isMulti = !isMulti;}
 	public static void togglePause(){isPause = !isPause;}
 	public static void toggleMenu(){isMenu = !isMenu;}
-    public static void toggleInstruction(){isInstruction = !isInstruction;}
+
 
     public static void startPlay(){isPlay = true;}
     public static void stopPlay(){isPlay = false;}
@@ -58,14 +54,15 @@ public class GAMESTATES {
     public static void startGame(){isEnd = false;}
 
 
-    public static void toggleGameType(){
-        if(gameType.equals("Player VS AI"))
-            gameType = "Player VS Player";
-        else
-            gameType = "Player VS AI";
-        toggleMulti();
-
-
+    public static String getGameOver() {
+        return gameOver;
     }
 
+    public static void lose() {
+        gameOver = "You Lose!!!";
+    }
+
+    public static void win(){
+        gameOver = "You Win!!!";
+    }
 }

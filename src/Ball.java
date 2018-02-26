@@ -158,12 +158,26 @@ String status = "Normal";
   public void checkLocation(Paddle paddle) {
       if (paddle.getY()+5 < y + diameter) {
           game.toggleWait();
-            System.out.print("Ball Dead");
       }
 
   }
 
     public int getDiameter() {
         return diameter;
+    }
+
+    public void flipX(){
+        dx*=-1;
+    }
+    public void flipY(){
+        dy*=-1;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 }

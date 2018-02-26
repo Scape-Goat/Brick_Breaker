@@ -77,12 +77,10 @@ Level level;
       if(getBounds().intersects(ball.getBounds())) {
         if(paint && y>=0) {
             if(ball.getBreakingStatus() != "Piercing") {
-              if (ball.x + (ball.getDiameter() * (2.0 / 3)) > x
-                  && ball.x + (ball.getDiameter() * (1.0 / 3)) < x + width)
-                ball.dy *= -1;
-              if (ball.y + (ball.getDiameter() * (2.0 / 3)) > y
-                  && ball.y + (ball.getDiameter() * (1.0 / 3)) < y + height)
-                ball.dx *= -1;
+              if (ball.getX() + (ball.getDiameter() * (2.0 / 3)) > x && ball.getY() + (ball.getDiameter() * (1.0 / 3)) < x + width)
+                ball.flipY();
+              if (ball.getY() + (ball.getDiameter() * (2.0 / 3)) > y && ball.getY() + (ball.getDiameter() * (1.0 / 3)) < y + height)
+                ball.flipX();
             }
         }
         if(ball.getBreakingStatus() != "Dulled")
@@ -91,8 +89,10 @@ Level level;
   }
 
   public void checkLocation(Paddle paddle, Ball ball){
-      if(paint && y+height >= paddle.getY()-ball.getDiameter() )
-          GAMESTATES.endGame();
+      if(paint && y+height >= paddle.getY()-ball.getDiameter() ){
+        GAMESTATES.endGame();
+        GAMESTATES.lose();
+      }
   }
 
 

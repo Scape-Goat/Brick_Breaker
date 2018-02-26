@@ -57,16 +57,12 @@ public class Power_Up {
 
         case 10: GAMESTATES.setMultiplier(2);  break;
         case 11:  GAMESTATES.setMultiplier(4); break;
-        //case 18: paddle.sizeReset(); break;
 
-        //case 19:  break;
-        //case 20:  break;
-        //case 21:
 
       }
       paint = false;
       board.powerUpTicks[type/2] = board.ticks;
-      System.out.println(type);
+
 
     }
     if(y>board.getHeight())

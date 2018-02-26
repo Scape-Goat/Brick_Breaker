@@ -104,6 +104,7 @@ public class Board extends JPanel implements ActionListener {
         else{
             g.setFont(new Font(Font.SERIF, Font.BOLD, 90));
             printSimpleString("Game Over", getWidth(), 0, getHeight()/2, g);
+            printSimpleString(GAMESTATES.getGameOver(),getWidth(),0,getHeight()/3, g);
         }
 
     }
